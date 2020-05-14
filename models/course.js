@@ -42,8 +42,7 @@ class Course {
             )
         })
 
-
-        console.log('Courses', courses);
+        // console.log('Courses', courses);
     }
 
     static getAll() {
@@ -53,13 +52,20 @@ class Course {
                 'utf-8',
                 (err, content) => {
                     if (err) {
-                        reject(err);
+                        reject(err)
                     } else {
-                        resolve(JSON.parse(content));
+                        resolve(JSON.parse(content))
                     }   
                 }
             )
         })
+    }
+
+    static async getById(id) {
+        // Получаем список курсов
+        const courses = await Course.getAll()
+        // Возвращаем тот единственный курс, который хотим получить
+        return courses.find(c => c.id === id)
     }
 }
 
